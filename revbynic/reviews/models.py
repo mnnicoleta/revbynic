@@ -1,10 +1,8 @@
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from django.db import models
-
+from django import forms
 # Create your models here.
-from django.utils import timezone
-from django.utils.timezone import now
 
 
 class Review(models.Model):
@@ -22,3 +20,9 @@ class Document(models.Model):
     document = models.FileField(upload_to=os.path.abspath('reviews/uploads/'))
     uploaded_at = models.DateTimeField(auto_now_add=True)
     review_fk = models.ForeignKey(Review, on_delete=models.CASCADE)
+
+
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
