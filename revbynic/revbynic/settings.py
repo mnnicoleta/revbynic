@@ -115,6 +115,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/revbynic/reviews/static/'
+
+MEDIA_URL = '/uploads/'
+#MEDIA_ROOT = 'revbynic/reviews/uploads/'
+
 
 DEFAULT_FROM_EMAIL = 'will@learndjango.com'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

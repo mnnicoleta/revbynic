@@ -3,7 +3,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 
-from .models import Review, ContactForm
+from .models import Review, ContactForm, Document
 
 
 def index(request):
@@ -23,9 +23,20 @@ def reviews(request):
     return render(request, 'reviews/allReviews.html/', context)
 
 
+def last_documents(request):
+    all_doc_list = Document.objects.order_by('-uploaded_at')[:3]
+    context = {'all_doc_list': all_doc_list}
+    return render(request, 'reviews/allDocuments.html/', context)
+
+
+def documents(request):
+    all_doc_list = Document.objects.order_by('-uploaded_at')
+    context = {'all_doc_list': all_doc_list}
+    return render(request, 'reviews/allDocuments.html/', context)
+
+
 def about(request):
-    response = "You're looking at the about page"
-    return HttpResponse(response)
+    return render(request, 'reviews/about.html')
 
 
 def contact_view(request):
@@ -41,9 +52,9 @@ def contact_view(request):
                 send_mail(subject, message, from_email, ['admin@example.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return redirect('success')
-    return render(request, "contact.html", {'form': form})
+            return redirect('/reviews/success/')
+    return render(request, "reviews/contact.html", {'form': form})
 
 
 def success_view(request):
-    return HttpResponse('Success! Thank you for your message.')
+    return render(request, 'reviews/success.html')
