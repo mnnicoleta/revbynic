@@ -17,7 +17,7 @@ class Review(models.Model):
 
 
 class Document(models.Model):
-    document = models.FileField(upload_to=os.path.abspath('reviews/uploads/'))
+    document = models.FileField(upload_to=os.path.abspath('reviews/static/uploads/'))
     uploaded_at = models.DateTimeField(auto_now_add=True)
     review_fk = models.ForeignKey(Review, on_delete=models.CASCADE)
 

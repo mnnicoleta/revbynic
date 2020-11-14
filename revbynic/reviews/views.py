@@ -1,4 +1,5 @@
 # Create your views here.
+from django import template
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -31,6 +32,8 @@ def last_documents(request):
 
 def documents(request):
     all_doc_list = Document.objects.order_by('-uploaded_at')
+    for doc in all_doc_list:
+        doc.document.name = cut(doc.document.name, 'C:/Users/nicoleta.manea/PycharmProjects/revbynic/revbynic/reviews/static')
     context = {'all_doc_list': all_doc_list}
     return render(request, 'reviews/allDocuments.html/', context)
 
@@ -58,3 +61,12 @@ def contact_view(request):
 
 def success_view(request):
     return render(request, 'reviews/success.html')
+
+
+register = template.Library()
+
+
+def cut(value, arg):
+    """Removes all values of arg from the given string"""
+    return value.replace(arg, '')
+

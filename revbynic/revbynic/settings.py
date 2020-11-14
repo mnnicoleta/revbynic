@@ -118,7 +118,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/revbynic/reviews/static/'
 
 MEDIA_URL = '/uploads/'
-#MEDIA_ROOT = 'revbynic/reviews/uploads/'
+# MEDIA_ROOT = 'revbynic/reviews/uploads/'
 
 
 DEFAULT_FROM_EMAIL = 'will@learndjango.com'
